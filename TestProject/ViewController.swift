@@ -103,7 +103,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         
         if let indexPath = (self.collectionView?.indexPathForItem(at: point))! as NSIndexPath? {
             if let url = searchResults[indexPath.row].contentUrl {
-                PasteboardHelper.shared.copyImageAtUrl(url)
+                UIPasteboard.general.copyImageAtUrl(url)
             }
         }
     }

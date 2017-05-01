@@ -8,10 +8,8 @@
 
 import UIKit
 
-class PasteboardHelper {
-    
-    static let shared = PasteboardHelper()
-    
+extension UIPasteboard {
+
     func copyImageAtUrl(_ url:URL) {
         print("sharing..")
         
@@ -21,12 +19,14 @@ class PasteboardHelper {
             guard let data = data, error == nil else { return }
             
             DispatchQueue.main.async() {
-                let image = UIImage(data: data)
-                UIPasteboard.general.image = image
-                print("copy ok!")
+                if let image = UIImage(data: data) {
+                    UIPasteboard.general.image = image
+                    print("copy ok")
+                } else {
+                    print("copy failed")
+                }
             }
         })
         task.resume()
     }
-    
 }
