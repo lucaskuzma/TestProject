@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class ViewController: UIViewController {
 
     var collectionView:UICollectionView?
     var searchResults = [SearchImage]()
@@ -62,20 +62,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         })
     }
-    
-    func handleLongPress(gestureRecognizer:UILongPressGestureRecognizer) {
-        if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
-            return
-        }
-        
-        let point = gestureRecognizer.location(in: self.collectionView)
-        
-        if let indexPath = (self.collectionView?.indexPathForItem(at: point))! as NSIndexPath?{
-            if let url = searchResults[indexPath.row].contentUrl {
-                PasteboardHelper.shared.copyImageAtUrl(url)
-            }
-        }
-    }
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -103,5 +89,22 @@ extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.navigationController?.pushViewController(DetailViewController(searchResults[indexPath.row]), animated: true)
+    }
+}
+
+extension ViewController: UIGestureRecognizerDelegate {
+    
+    func handleLongPress(gestureRecognizer:UILongPressGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
+            return
+        }
+        
+        let point = gestureRecognizer.location(in: self.collectionView)
+        
+        if let indexPath = (self.collectionView?.indexPathForItem(at: point))! as NSIndexPath? {
+            if let url = searchResults[indexPath.row].contentUrl {
+                PasteboardHelper.shared.copyImageAtUrl(url)
+            }
+        }
     }
 }
