@@ -18,6 +18,10 @@ class DetailViewController: UIViewController {
         loadImage()
     }
     
+    override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = .white
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

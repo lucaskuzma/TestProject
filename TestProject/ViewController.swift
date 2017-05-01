@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         load(count: perPage * 2)
         
         self.title = "Revl Challenge"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
     }
 
     override func didReceiveMemoryWarning() {
