@@ -18,11 +18,12 @@ class SearchApi {
             return
         }
         
-        let request:NSMutableURLRequest = NSMutableURLRequest(url: url)
-        request.addValue("5db7a77b19d943f2a4cce83ce6b59502", forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
+        var request:URLRequest = URLRequest(url: url)
+        request.setValue("5db7a77b19d943f2a4cce83ce6b59502", forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         request.httpMethod = "GET"
         
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {data,response,error in
+        let task = URLSession.shared.dataTask(with: request) {
+            data,response,error in
             
             guard error == nil else {
                 print("Error")
@@ -38,7 +39,6 @@ class SearchApi {
             do {
                 if let searchResult = try JSONSerialization.jsonObject(with: responseData, options: []) as? Dictionary<String, Any>
                 {
-//                    print(searchResult)
                     print("OK: data received")
 
                     var output = [SearchImage]()
