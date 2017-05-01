@@ -12,6 +12,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var collectionView:UICollectionView?
     var searchResults = [SearchImage]()
+    let perPage:Int = 28
+    var curPage:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +50,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.collectionView?.addGestureRecognizer(longPress)
     }
     
-    func load() {
-        SearchApi.shared.search(keyword: "dogs", completion: {result in
-            self.searchResults = result
+    func load(_ page:Int = 0) {
+        SearchApi.shared.search(keyword: "dogs", count: perPage, offset: page * perPage, completion: {result in
+            self.searchResults += result
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
@@ -83,6 +85,14 @@ extension ViewController: UICollectionViewDataSource {
         cell.backgroundColor = .orange
         cell.image = searchResults[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if(indexPath.row / perPage == curPage) {
+            print("loading new page.. ", indexPath.row, curPage)
+            curPage += 1
+            load(curPage)
+        }
     }
 }
 

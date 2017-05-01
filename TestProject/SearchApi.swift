@@ -12,8 +12,8 @@ class SearchApi {
     
     static let shared = SearchApi()
     
-    func search(keyword:String, completion:@escaping (_ result: [SearchImage]) -> Void) {
-        guard let url = URL(string: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=\(keyword)&count=10&offset=0&mkt=en-us&safeSearch=Moderate") else {
+    func search(keyword:String, count:Int = 10, offset: Int = 0, completion:@escaping (_ result: [SearchImage]) -> Void) {
+        guard let url = URL(string: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=\(keyword)&count=\(count)&offset=\(offset)&mkt=en-us&safeSearch=Moderate") else {
             print("Error: cannot create URL")
             return
         }

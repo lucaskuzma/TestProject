@@ -19,9 +19,7 @@ class ImageCell: UICollectionViewCell {
         }
         set(image) {
             self._image = image
-            
-            print("set")
-            
+                        
             if let previousTask = self.task {
                 previousTask.cancel()
             }
