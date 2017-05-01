@@ -13,13 +13,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var collectionView:UICollectionView?
     var searchResults = [SearchImage]()
     let perPage:Int = 28
-    var curPage:Int = 0
+    var curPage:Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
-        load()
+        load(count: perPage * 2)
         
         self.title = "Revl Challenge"
     }
@@ -50,8 +50,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.collectionView?.addGestureRecognizer(longPress)
     }
     
-    func load(_ page:Int = 0) {
-        SearchApi.shared.search(keyword: "dogs", count: perPage, offset: page * perPage, completion: {result in
+    func load(count:Int = 0, page:Int = 0) {
+        SearchApi.shared.search(keyword: "dogs", count: count > 0 ? count : perPage, offset: page * perPage, completion: {result in
             self.searchResults += result
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
@@ -91,7 +91,7 @@ extension ViewController: UICollectionViewDataSource {
         if(indexPath.row / perPage == curPage) {
             print("loading new page.. ", indexPath.row, curPage)
             curPage += 1
-            load(curPage)
+            load(page: curPage)
         }
     }
 }
