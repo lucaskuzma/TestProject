@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: ViewController(nibName: nil, bundle: nil))
         window?.makeKeyAndVisible()
         
+        UINavigationBar.appearance().barTintColor = UIColor.init(red: 36/255.0, green: 95/255.0, blue: 245/255.0, alpha: 1.0)
+        
         return true
     }
 

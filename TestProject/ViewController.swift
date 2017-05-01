@@ -18,6 +18,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         setupCollectionView()
         load()
+        
+        self.title = "Revl Challenge"
     }
 
     override func didReceiveMemoryWarning() {
