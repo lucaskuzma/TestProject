@@ -86,7 +86,6 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath) as! ImageCell
-        cell.backgroundColor = .orange
         cell.image = searchResults[indexPath.row]
         return cell
     }
