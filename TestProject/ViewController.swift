@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var collectionView:UICollectionView?
     var searchResults = [SearchImage]()
@@ -38,6 +38,12 @@ class ViewController: UIViewController {
         collectionView?.register(ImageCell.self, forCellWithReuseIdentifier: "DefaultCell")
         
         self.view.addSubview(collectionView!)
+        
+        let longPress:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        longPress.delaysTouchesBegan = true
+        self.collectionView?.addGestureRecognizer(longPress)
     }
     
     func load() {
@@ -47,6 +53,20 @@ class ViewController: UIViewController {
                 self.collectionView?.reloadData()
             }
         })
+    }
+    
+    func handleLongPress(gestureRecognizer:UILongPressGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
+            return
+        }
+        
+        let point = gestureRecognizer.location(in: self.collectionView)
+        
+        if let indexPath = (self.collectionView?.indexPathForItem(at: point))! as NSIndexPath?{
+            if let url = searchResults[indexPath.row].contentUrl {
+                PasteboardHelper.shared.copyImageAtUrl(url)
+            }
+        }
     }
 }
 
