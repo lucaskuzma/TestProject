@@ -23,6 +23,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.title = "Revl Challenge"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        let whiteBar = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 20))
+        whiteBar.backgroundColor = .white
+        self.navigationController?.view.addSubview(whiteBar)
     }
 
     override func didReceiveMemoryWarning() {
