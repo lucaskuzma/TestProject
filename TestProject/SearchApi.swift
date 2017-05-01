@@ -12,7 +12,7 @@ class SearchApi {
     
     static let shared = SearchApi()
     
-    func search(keyword:String, completion:(_ result: [SearchImage]) -> Void) {
+    func search(keyword:String, completion:@escaping (_ result: [SearchImage]) -> Void) {
         guard let url = URL(string: "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=cats&count=10&offset=0&mkt=en-us&safeSearch=Moderate") else {
             print("Error: cannot create URL")
             return
@@ -36,11 +36,21 @@ class SearchApi {
             }
             
             do {
-                if let deserialized = try JSONSerialization.jsonObject(with: responseData, options: []) as? Dictionary<String, Any>
+                if let searchResult = try JSONSerialization.jsonObject(with: responseData, options: []) as? Dictionary<String, Any>
                 {
-                    print(deserialized)
+//                    print(searchResult)
                     print("OK: data received")
-                    // completion()
+
+                    var output = [SearchImage]()
+                    
+                    if let images = searchResult["value"] {
+                        let imagesCast = (images as AnyObject) as! [Dictionary<String, Any>]
+                        for image in imagesCast {
+                            output.append(SearchImage(image))
+                        }
+                    }
+
+                    completion(output)
                 } else {
                     print("Error: could not deserialize")
                 }

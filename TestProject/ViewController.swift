@@ -11,14 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     var collectionView:UICollectionView?
+    var searchResults = [SearchImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        SearchApi.shared.search(keyword: "dogs", completion: {result in
-//            print("callback called")
-//        })
+        
         setupCollectionView()
+        load()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,21 +35,31 @@ class ViewController: UIViewController {
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView?.dataSource = self
         collectionView?.delegate = self
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
+        collectionView?.register(ImageCell.self, forCellWithReuseIdentifier: "DefaultCell")
         
         self.view.addSubview(collectionView!)
+    }
+    
+    func load() {
+        SearchApi.shared.search(keyword: "dogs", completion: {result in
+            self.searchResults = result
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+        })
     }
 }
 
 extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+        return searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath) as! ImageCell
         cell.backgroundColor = .orange
+        cell.image = searchResults[indexPath.row]
         return cell
     }
 }

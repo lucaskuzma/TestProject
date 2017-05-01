@@ -9,5 +9,7 @@
 import Foundation
 
 struct SearchImage {
-    
+    init (_ data:Dictionary<String, Any>) {
+        print(data["thumbnailUrl"] ?? "no url")
+    }
 }

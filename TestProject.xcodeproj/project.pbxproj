@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00960771EB7A28B00C3FB33 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00960761EB7A28B00C3FB33 /* ImageCell.swift */; };
 		A07182D71EB6C319000D83CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07182D61EB6C319000D83CE /* AppDelegate.swift */; };
 		A07182D91EB6C319000D83CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07182D81EB6C319000D83CE /* ViewController.swift */; };
 		A07182DE1EB6C319000D83CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A07182DD1EB6C319000D83CE /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A00960761EB7A28B00C3FB33 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		A07182D31EB6C319000D83CE /* TestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A07182D61EB6C319000D83CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A07182D81EB6C319000D83CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				A07182D61EB6C319000D83CE /* AppDelegate.swift */,
 				A07182D81EB6C319000D83CE /* ViewController.swift */,
+				A00960761EB7A28B00C3FB33 /* ImageCell.swift */,
 				A07183041EB78B61000D83CE /* SearchApi.swift */,
 				A07183061EB78CB7000D83CE /* SearchImage.swift */,
 				A07182DD1EB6C319000D83CE /* Assets.xcassets */,
@@ -268,6 +271,7 @@
 				A07183071EB78CB7000D83CE /* SearchImage.swift in Sources */,
 				A07183051EB78B61000D83CE /* SearchApi.swift in Sources */,
 				A07182D71EB6C319000D83CE /* AppDelegate.swift in Sources */,
+				A00960771EB7A28B00C3FB33 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
