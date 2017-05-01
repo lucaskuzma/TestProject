@@ -9,7 +9,12 @@
 import Foundation
 
 struct SearchImage {
+    
+    var thumbnailUrl:URL?
+    
     init (_ data:Dictionary<String, Any>) {
         print(data["thumbnailUrl"] ?? "no url")
+        
+        thumbnailUrl = URL(string:data["thumbnailUrl"] as! String)
     }
 }

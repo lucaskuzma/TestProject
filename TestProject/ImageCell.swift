@@ -10,6 +10,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     
+    var task:URLSessionDataTask?
     var _image:SearchImage?
     
     var image:SearchImage? {
@@ -20,6 +21,25 @@ class ImageCell: UICollectionViewCell {
             self._image = image
             
             print("set")
+            
+            if let previousTask = self.task {
+                previousTask.cancel()
+            }
+            
+            if let thumbnailUrl:URL = image?.thumbnailUrl {
+                self.task = URLSession.shared.dataTask(with: thumbnailUrl, completionHandler: {
+                    (data, response, error) in
+                    
+                    guard let data = data, error == nil else { return }
+                    
+                    DispatchQueue.main.async() {
+                        let thumb = UIImage(data: data)
+                        let thumbView = UIImageView(image: thumb)
+                        self.contentView.addSubview(thumbView)
+                    }
+                })
+                self.task?.resume()
+            }
         }
     }
 }
