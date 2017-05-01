@@ -30,11 +30,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     func setupCollectionView() {
-        let quarterWidth = self.view.frame.size.width / 4.0 - 8
+        let quarterWidth = self.view.frame.size.width / 4.0 - 1
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: quarterWidth, height: quarterWidth)
         layout.minimumLineSpacing = 1.0
-        layout.minimumLineSpacing = 1.0
+        layout.minimumInteritemSpacing = 1.0
 
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView?.dataSource = self
