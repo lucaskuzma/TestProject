@@ -35,6 +35,7 @@ class ImageCell: UICollectionViewCell {
                     DispatchQueue.main.async() {
                         let thumb = UIImage(data: data)
                         let thumbView = UIImageView(image: thumb)
+                        thumbView.frame = self.bounds
                         self.contentView.addSubview(thumbView)
                     }
                 })
